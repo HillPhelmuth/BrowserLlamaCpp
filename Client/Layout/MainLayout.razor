@@ -1,0 +1,27 @@
+﻿@inherits LayoutComponentBase
+
+<RadzenLayout Style="height:99vh">
+    <RadzenHeader>
+	    <RadzenRow>
+		    <RadzenColumn Size="1">
+                <RadzenSidebarToggle Click="@(() => sideBarToggle = !sideBarToggle)"></RadzenSidebarToggle>
+            </RadzenColumn>
+		    <RadzenColumn Size="10"></RadzenColumn>
+		    <RadzenColumn Size="1"></RadzenColumn>
+	    </RadzenRow>
+    </RadzenHeader>
+    <RadzenSidebar @bind-Expanded=sideBarToggle >
+        <RadzenPanelMenu>
+            <RadzenPanelMenuItem Path="" Icon="home" Text="Home" ></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Path="llm" Icon="chat" Text="Load and Chat Local"></RadzenPanelMenuItem>
+        </RadzenPanelMenu>
+    </RadzenSidebar>
+    <RadzenBody>
+        @Body
+    </RadzenBody>
+</RadzenLayout>
+<RadzenComponents></RadzenComponents>
+
+@code {
+    bool sideBarToggle;
+}

@@ -1,0 +1,25 @@
+﻿<RadzenCard Style="width:30rem;height:35rem">
+	<RadzenText TextStyle="TextStyle.DisplayH6" TextAlign="TextAlign.Center" Text="@ModelName"></RadzenText>
+	<RadzenText TextStyle="TextStyle.Subtitle1" TextAlign="TextAlign.Center">
+		Size: @ModelSize.ToString("N2") MB
+	</RadzenText>
+	<RadzenText TextStyle="TextStyle.Subtitle1" TextAlign="TextAlign.Center">
+		Metadata
+	</RadzenText>
+	<RadzenDataList Style="height:400px;overflow:auto;" AllowVirtualization="true" Data="_outputProperties">
+		<Template Context="item">
+			<RadzenCard Style="width:100%;padding:2px 3px">
+				<RadzenRow>
+					<RadzenColumn>
+						<RadzenText Text="@item.Key"></RadzenText>
+					</RadzenColumn>
+					<RadzenColumn>
+						<RadzenText Text="@item.Value.ToString()"/>
+					</RadzenColumn>
+				</RadzenRow>
+			</RadzenCard>
+		</Template>
+	</RadzenDataList>
+	<RadzenButton Size="ButtonSize.ExtraSmall" Click="Select" Text="Select Model"></RadzenButton>
+	<RadzenButton Size="ButtonSize.ExtraSmall" Click="Cancel" Text="Cancel"></RadzenButton>
+</RadzenCard>

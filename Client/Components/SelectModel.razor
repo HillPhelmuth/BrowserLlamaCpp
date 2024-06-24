@@ -1,0 +1,45 @@
+﻿
+<RadzenRow>
+	<RadzenColumn>
+		<RadzenTemplateForm Data="_searchForm" TItem="SearchForm" Submit="Submit">
+			<RadzenFormField Text="Model Search term" Style="width:100%">
+				<RadzenTextBox @bind-Value="_searchForm.SearchTerm" Style="width:100%"></RadzenTextBox>
+			</RadzenFormField>
+			<RadzenFormField Text="Model Tag Filter">
+				<RadzenTextBox @bind-Value="_searchForm.FilterType"></RadzenTextBox>
+			</RadzenFormField>
+			<RadzenFormField Text="Result Count">
+				<RadzenNumeric @bind-Value=_searchForm.Count Max="100" Min="1"></RadzenNumeric>
+			</RadzenFormField>
+			<RadzenButton ButtonType="ButtonType.Submit" Size="ButtonSize.Small" Style="margin-top:.8rem" Text="Search"></RadzenButton>
+		</RadzenTemplateForm>
+	</RadzenColumn>
+	
+</RadzenRow>
+<RadzenRow>
+	<RadzenColumn>
+		<RadzenDataGrid Data="_huggingFaceModels" TItem="HuggingFaceModel" AllowPaging="true" PageSize="5" AllowFiltering="true" AllowSorting="true" Density="Density.Compact">
+			<Template Context="model">
+				<RadzenDataGrid Data="model.DownloadUrls()" AllowFiltering="true" AllowSorting="true">
+					<Columns>
+						<RadzenDataGridColumn Title="Name" Width="80%">
+							<Template Context="download">
+								@download.Key
+							</Template>
+						</RadzenDataGridColumn>
+						<RadzenDataGridColumn Width="20%">
+							<Template Context="download">
+								<RadzenButton Size="ButtonSize.ExtraSmall" Click="@(args => ShowModelDetails(download.Value, download.Key))" Text="Download"></RadzenButton>
+							</Template>
+						</RadzenDataGridColumn>
+					</Columns>
+				</RadzenDataGrid>
+			</Template>
+			<Columns>
+				<RadzenDataGridColumn TItem="HuggingFaceModel" Property="@nameof(HuggingFaceModel.HuggingFaceModelId)" Title="Model" Width="65%"></RadzenDataGridColumn>
+				<RadzenDataGridColumn TItem="HuggingFaceModel" Property="@nameof(HuggingFaceModel.Downloads)" Title="Downloads" Width="20%"></RadzenDataGridColumn>
+				<RadzenDataGridColumn TItem="HuggingFaceModel" Property="@nameof(HuggingFaceModel.Likes)" Title="Likes" Width="15%"></RadzenDataGridColumn>
+			</Columns>
+		</RadzenDataGrid>
+	</RadzenColumn>
+</RadzenRow>
